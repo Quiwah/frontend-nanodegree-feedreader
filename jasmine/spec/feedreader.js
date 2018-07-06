@@ -63,8 +63,11 @@ $(function() {
         * clicked and does it hide when clicked again.
         */
         it('becomes visible', function() {
-            $('.menu-icon-link').click();
+            $('.menu-icon-link').trigger('click');
             expect(body).not.toHaveClass('menu-hidden');
+
+            $('.menu-icon-link').trigger('click');
+            expect(body).toHaveClass('menu-hidden');
         });
     });
 
@@ -76,31 +79,38 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        let feed = document.getElementsByClassName('feed'),
-        article = document.getElementsByTagName('article');
+        beforeEach(function (done) {
+            loadFeed(0, done);
+        });
 
-        beforeEach(function() {
-
-        }); 
-
-        it('are in the feed container', function() {
-            expect(feed).toContainElement(article);
-            done();
+        it('at least one entry is in the feed container', function() {
+            expect($('.feed .entry').length).not.toBeNull();
         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
+        let oldFeed;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it('changes', function() {
-            spyOn(loadFeed(success), '');
+        beforeEach(function(done) {
+            //first loading
+            loadFeed(0, function() {
+                oldFeed = $('.feed').html();
+                //second loading
+                loadFeed(1, function() {
+                    done();
+                });
+            });
+        });
 
-            $('.feed').trigger('change');
-
-            expect(loadFeed.success).toHaveBeenCalled();
+        it('changes', function(done) {
+            let newFeed = $('.feed').html();
+            //compare the two feeds
+            expect(oldFeed).not.toEqual(newFeed);
+            done();
         });
     });
 }());
