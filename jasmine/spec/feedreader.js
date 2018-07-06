@@ -48,13 +48,14 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function() {
+        let body = document.body;
         /* TODO: Write a test that ensures the menu element is
         * hidden by default. You'll have to analyze the HTML and
         * the CSS to determine how we're performing the
         * hiding/showing of the menu element.
         */
         it('is hidden', function() {
-            expect($('body').toHaveClass('menu-hidden'));
+            expect(body).toHaveClass('menu-hidden');
         });
         /* TODO: Write a test that ensures the menu changes
         * visibility when the menu icon is clicked. This test
@@ -62,7 +63,8 @@ $(function() {
         * clicked and does it hide when clicked again.
         */
         it('becomes visible', function() {
-            expect($('body').not.toHaveClass('menu-hidden'));
+            $('.menu-icon-link').click();
+            expect(body).not.toHaveClass('menu-hidden');
         });
     });
 
@@ -74,9 +76,16 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('are in the feed container', async function() {
-            await loadFeed();
-            expect($('.feed').toContain('.entry'));
+        let feed = document.getElementsByClassName('feed'),
+        article = document.getElementsByTagName('article');
+
+        beforeEach(function() {
+
+        }); 
+
+        it('are in the feed container', function() {
+            expect(feed).toContainElement(article);
+            done();
         });
     });
 
@@ -87,7 +96,11 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it('changes', function() {
-            expect()
+            spyOn(loadFeed(success), '');
+
+            $('.feed').trigger('change');
+
+            expect(loadFeed.success).toHaveBeenCalled();
         });
     });
 }());
