@@ -11,6 +11,6 @@ For more information, check [the original repo](https://github.com/udacity/front
 
 ## Built with
 
-*[Google Feed API](https://developers.google.com/feed/)
-*[Jasmine(3.1.0)](http://jasmine.github.io/)
-*[jQuery(3.3.1)](https://jquery.com/)
+* [Google Feed API](https://developers.google.com/feed/)
+* [Jasmine(3.1.0)](http://jasmine.github.io/)
+* [jQuery(3.3.1)](https://jquery.com/)
