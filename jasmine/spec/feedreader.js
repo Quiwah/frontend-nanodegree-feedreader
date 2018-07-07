@@ -33,7 +33,7 @@ $(function() {
         allFeeds.forEach(function(value){
             it('has a URL', function() {
                 expect(value.url).toBeDefined();
-                expect(value.url).not.toBeNull();
+                expect(value.url.length).not.toBe(0);
             });
             /* TODO: Write a test that loops through each feed
             * in the allFeeds object and ensures it has a name defined
@@ -41,7 +41,7 @@ $(function() {
             */
             it('has a URL', function() {
                 expect(value.name).toBeDefined();
-                expect(value.name).not.toBeNull();
+                expect(value.name.length).not.toBe(0);
             });
         });
     });
@@ -84,7 +84,7 @@ $(function() {
         });
 
         it('at least one entry is in the feed container', function() {
-            expect($('.feed .entry').length).not.toBeNull();
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
